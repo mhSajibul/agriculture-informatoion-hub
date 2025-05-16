@@ -1,0 +1,561 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultural Information Hub</title>
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #4caf50;
+            --light-green: #e8f5e9;
+            --accent-color: #ffc107;
+            --text-color: #333;
+            --light-text: #fff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--secondary-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: var(--light-green);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+        }
+        
+        /* Featured Sections */
+        .featured-sections {
+            padding: 50px 0;
+            background-color: #fff;
+        }
+        
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-heading h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-heading h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 25%;
+        }
+        
+        .cards-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .card {
+            flex: 1 1 300px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-img {
+            height: 200px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .card-content p {
+            margin-bottom: 20px;
+        }
+        
+        .card-link {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .card-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Main Sections */
+        .main-section {
+            padding: 60px 0;
+        }
+        
+        .main-section:nth-child(odd) {
+            background-color: var(--light-green);
+        }
+        
+        .section-content {
+            margin-top: 30px;
+        }
+        
+        /* Farming Guides */
+        .guides-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .guide-item {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .guide-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .guide-item ul {
+            padding-left: 20px;
+        }
+        
+        .guide-item li {
+            margin-bottom: 8px;
+        }
+        
+        /* Crop Details */
+        .crop-categories {
+            margin-top: 30px;
+        }
+        
+        .crop-category {
+            margin-bottom: 30px;
+        }
+        
+        .crop-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .crops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .crop-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .crop-img {
+            height: 150px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .crop-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .crop-info {
+            padding: 15px;
+        }
+        
+        .crop-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .crop-info p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .crop-info .details {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        /* Pest Control */
+        .pest-control-strategies {
+            margin-top: 30px;
+        }
+        
+        .pest-strategy {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .pest-strategy h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .pest-strategy p {
+            margin-bottom: 15px;
+        }
+        
+        .tips-list {
+            padding-left: 20px;
+        }
+        
+        .tips-list li {
+            margin-bottom: 10px;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .form-submit:hover {
+            background-color: #1b5e20;
+        }
+        
+        /* Contact Info */
+        .contact-info {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: var(--light-text);
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+            }
+            
+            .card {
+                margin-bottom: 30px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Agricultural Information Hub</h1>
+                <p>A comprehensive resource for farmers and agriculture enthusiasts</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="farming-guides.html">Farming Guides</a></li>
+                <li><a href="crop-details.html">Crop Details</a></li>
+                <li><a href="pest-control.html">Pest Control</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    
+
+    <!-- Pest Control Section -->
+    <section id="pest-control" class="main-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Pest Control Strategies</h2>
+            </div>
+            <div class="section-content">
+                <p>Integrated pest management (IPM) strategies including biological controls and organic remedies. Discover effective approaches for monitoring, early detection, and treatment of pest infestations.</p>
+                
+                <div class="pest-control-strategies">
+                    <div class="pest-strategy">
+                        <h3>Integrated Pest Management (IPM)</h3>
+                        <p>IPM combines preventive measures, monitoring, and intervention techniques to minimize crop damage while reducing reliance on chemical pesticides.</p>
+                        <ul class="tips-list">
+                            <li>Regularly scout fields for early detection of pests</li>
+                            <li>Use pest-resistant crop varieties when available</li>
+                            <li>Implement crop rotation to disrupt pest cycles</li>
+                            <li>Maintain field sanitation to reduce pest habitat</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pest-strategy">
+                        <h3>Biological Controls</h3>
+                        <p>Biological control methods use natural enemies of pests, such as predators, parasites, and pathogens, to suppress pest populations.</p>
+                        <ul class="tips-list">
+                            <li>Introduce beneficial insects like ladybugs and lacewings</li>
+                            <li>Plant companion crops that attract natural predators</li>
+                            <li>Use microbial pesticides like Bacillus thuringiensis (Bt)</li>
+                            <li>Implement trap crops to divert pests from main crops</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pest-strategy">
+                        <h3>Organic Remedies</h3>
+                        <p>Organic pest control solutions provide environmentally friendly alternatives to synthetic pesticides.</p>
+                        <ul class="tips-list">
+                            <li>Use neem oil spray for insect control</li>
+                            <li>Apply diatomaceous earth for crawling insects</li>
+                            <li>Create garlic and pepper sprays for repelling pests</li>
+                            <li>Use horticultural oils to control soft-bodied insects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2025 Agricultural Information Hub. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="farming-guides.html">Farming Guides</a>
+                    <a href="crop-details.html">Crop Details</a>
+                    <a href="pest-control.html">Pest Control</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <p>Designed to provide comprehensive resources for farmers and agriculture enthusiasts.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form validation
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your submission! Our agricultural experts will contact you soon.');
+            this.reset();
+        });
+    </script>
+
+
+</body></html>

@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultural Information Hub</title>
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #4caf50;
+            --light-green: #e8f5e9;
+            --accent-color: #ffc107;
+            --text-color: #333;
+            --light-text: #fff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--secondary-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hero Slider Styles */
+    .hero {
+        padding: 0;
+        position: relative;
+        overflow: hidden;
+        background-color: transparent;
+    }
+    
+    .slider-container {
+        position: relative;
+        width: 100%;
+        height: 600px;
+    }
+    
+    .slider {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .slide.active {
+        opacity: 1;
+    }
+    
+    .slide-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        z-index: -1;
+        filter: brightness(0.7);
+    }
+    
+    .slide-content {
+        max-width: 800px;
+        text-align: center;
+        padding: 20px;
+        color: var(--light-text);
+        z-index: 2;
+        position: relative;
+    }
+    
+    .slide-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: var(--light-text);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .slide-content p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Slider Controls */
+    .slider-controls {
+        position: absolute;
+        bottom: 30px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+    
+    .prev-btn,
+    .next-btn {
+        background-color: rgba(46, 125, 50, 0.7);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin: 0 15px;
+        transition: all 0.3s ease;
+    }
+    
+    .prev-btn:hover,
+    .next-btn:hover {
+        background-color: rgba(46, 125, 50, 0.9);
+    }
+    
+    .slider-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        margin: 0 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .dot.active {
+        background-color: var(--accent-color);
+        transform: scale(1.2);
+    }
+
+        
+        /* Featured Sections */
+        .featured-sections {
+            padding: 50px 0;
+            background-color: #fff;
+        }
+        
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-heading h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-heading h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 25%;
+        }
+        
+        .cards-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .card {
+            flex: 1 1 300px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-img {
+            height: 200px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .card-content p {
+            margin-bottom: 20px;
+        }
+        
+        .card-link {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .card-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Main Sections */
+        .main-section {
+            padding: 60px 0;
+        }
+        
+        .main-section:nth-child(odd) {
+            background-color: var(--light-green);
+        }
+        
+        .section-content {
+            margin-top: 30px;
+        }
+        
+        /* Farming Guides */
+        .guides-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .guide-item {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .guide-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .guide-item ul {
+            padding-left: 20px;
+        }
+        
+        .guide-item li {
+            margin-bottom: 8px;
+        }
+        
+        /* Crop Details */
+        .crop-categories {
+            margin-top: 30px;
+        }
+        
+        .crop-category {
+            margin-bottom: 30px;
+        }
+        
+        .crop-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .crops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .crop-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .crop-img {
+            height: 150px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .crop-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .crop-info {
+            padding: 15px;
+        }
+        
+        .crop-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .crop-info p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .crop-info .details {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        /* Pest Control */
+        .pest-control-strategies {
+            margin-top: 30px;
+        }
+        
+        .pest-strategy {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .pest-strategy h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .pest-strategy p {
+            margin-bottom: 15px;
+        }
+        
+        .tips-list {
+            padding-left: 20px;
+        }
+        
+        .tips-list li {
+            margin-bottom: 10px;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .form-submit:hover {
+            background-color: #1b5e20;
+        }
+        
+        /* Contact Info */
+        .contact-info {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: var(--light-text);
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+            }
+            
+            .card {
+                margin-bottom: 30px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            .slider-container {
+            height: 450px;
+            }
+            
+            .slide-content h2 {
+                font-size: 2rem;
+            }
+            
+            .slide-content p {
+                font-size: 1rem;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+        .slider-container {
+            height: 400px;
+        }
+        
+        .slide-content h2 {
+            font-size: 1.8rem;
+        }
+        
+        .prev-btn,
+        .next-btn {
+            width: 35px;
+            height: 35px;
+            margin: 0 10px;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Agricultural Information Hub</h1>
+                <p>A comprehensive resource for farmers and agriculture enthusiasts</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="farming-guides.html">Farming Guides</a></li>
+                <li><a href="crop-details.html">Crop Details</a></li>
+                <li><a href="pest-control.html">Pest Control</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- Hero Section with Slider -->
+<section id="home" class="hero">
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide active">
+                <div class="slide-content">
+                    <h2>Welcome to Agricultural Information Hub</h2>
+                    <p>Your one-stop resource for farming guides, detailed crop information, pest control strategies, and expert agricultural advice.</p>
+                    <a href="farming-guides.html" class="cta-button">Explore Guides</a>
+                </div>
+                <div class="slide-bg" style="background-image: url('assets/image/hero-1.png')"></div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <h2>Sustainable Farming Practices</h2>
+                    <p>Learn about eco-friendly farming methods that conserve resources while maximizing crop yield and quality.</p>
+                    <a href="farming-guides.html" class="cta-button">Learn More</a>
+                </div>
+                <div class="slide-bg" style="background-image: url('assets/image/hero-2.png')"></div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <h2>Expert Agricultural Advice</h2>
+                    <p>Get guidance from agricultural specialists to improve your farming techniques and address common challenges.</p>
+                    <a href="contact.html" class="cta-button">Contact Experts</a>
+                </div>
+                <div class="slide-bg" style="background-image: url('assets/image/hero-3.png')"></div>
+            </div>
+        </div>
+        
+        <div class="slider-controls">
+            <button class="prev-btn" aria-label="Previous slide"><span>&#10094;</span></button>
+            <div class="slider-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+            </div>
+            <button class="next-btn" aria-label="Next slide"><span>&#10095;</span></button>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Featured Sections -->
+    <section class="featured-sections">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Featured Resources</h2>
+            </div>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="assets/image/guide.jpg" alt="Farming Guide">
+                    </div>
+                    <div class="card-content">
+                        <h3>Farming Guides</h3>
+                        <p>Comprehensive guides covering various aspects of farming practices, techniques, and methodologies.</p>
+                        <a href="#farming-guides" class="card-link">Read More →</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="assets/image/rice.png" alt="Crop Details">
+                    </div>
+                    <div class="card-content">
+                        <h3>Crop Details</h3>
+                        <p>Detailed information on different crops including varieties, cultivation methods, soil requirements, and harvesting techniques.</p>
+                        <a href="#crop-details" class="card-link">Read More →</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="assets/image/pest-control.png" alt="Pest Control">
+                    </div>
+                    <div class="card-content">
+                        <h3>Pest Control</h3>
+                        <p>Integrated pest management strategies including biological controls and organic remedies for effective treatment.</p>
+                        <a href="#pest-control" class="card-link">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Farming Guides Section -->
+    <section id="farming-guides" class="main-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Farming Guides</h2>
+            </div>
+            <div class="section-content">
+                <p>Our collection of guides and tutorials covers various aspects of farming practices, techniques, and methodologies. Learn from experts and improve your agricultural productivity with our step-by-step instructions.</p>
+                
+                <div class="guides-container">
+                    <div class="guide-item">
+                        <h3>Seasonal Farming</h3>
+                        <ul>
+                            <li>Spring Planting Guide</li>
+                            <li>Summer Crop Management</li>
+                            <li>Fall Harvest Techniques</li>
+                            <li>Winter Preparation</li>
+                        </ul>
+                    </div>
+                    <div class="guide-item">
+                        <h3>Farming Methods</h3>
+                        <ul>
+                            <li>Organic Farming Practices</li>
+                            <li>Sustainable Agriculture</li>
+                            <li>No-Till Farming</li>
+                            <li>Precision Agriculture</li>
+                        </ul>
+                    </div>
+                    <div class="guide-item">
+                        <h3>Soil Management</h3>
+                        <ul>
+                            <li>Soil Testing Techniques</li>
+                            <li>Nutrient Management</li>
+                            <li>Soil Conservation</li>
+                            <li>Composting Methods</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crop Details Section -->
+    <section id="crop-details" class="main-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Crop Details</h2>
+            </div>
+            <div class="section-content">
+                <p>Comprehensive information on different crops including varieties, cultivation methods, soil requirements, and harvesting techniques. Our detailed profiles help you make informed decisions for your farm.</p>
+                
+                <div class="crop-categories">
+                    <div class="crop-category">
+                        <h3>Grains</h3>
+                        <div class="crops-grid">
+                            <div class="crop-card">
+                                <div class="crop-img">
+                                    <img src="assets/image/rice.png" alt="Rice">
+                                </div>
+                                <div class="crop-info">
+                                    <h4>Rice</h4>
+                                    <p>Staple food crop grown in flooded fields called paddies.</p>
+                                    <div class="details">Soil: Clayey, Water: High, Season: Warm</div>
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-img">
+                                    <img src="assets/image/wheat.png" alt="Wheat">
+                                </div>
+                                <div class="crop-info">
+                                    <h4>Wheat</h4>
+                                    <p>One of the world's most important cereal grains.</p>
+                                    <div class="details">Soil: Loamy, Water: Moderate, Season: Cool</div>
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-img">
+                                    <img src="assets/image/maize.png" alt="Maize">
+                                </div>
+                                <div class="crop-info">
+                                    <h4>Maize</h4>
+                                    <p>Versatile crop used for food, feed, and biofuel.</p>
+                                    <div class="details">Soil: Well-drained, Water: Moderate, Season: Warm</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="crop-category">
+                        <h3>Vegetables</h3>
+                        <div class="crops-grid">
+                            <div class="crop-card">
+                                <div class="crop-img">
+                                    <img src="assets/image/tomato.png" alt="Tomato">
+                                </div>
+                                <div class="crop-info">
+                                    <h4>Tomato</h4>
+                                    <p>Widely grown fruit used as a vegetable in many cuisines.</p>
+                                    <div class="details">Soil: Well-drained, Water: Moderate, Season: Warm</div>
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-img">
+                                    <img src="assets/image/carrot.png" alt="Carrot">
+                                </div>
+                                <div class="crop-info">
+                                    <h4>Carrot</h4>
+                                    <p>Root vegetable rich in beta-carotene and antioxidants.</p>
+                                    <div class="details">Soil: Sandy, Water: Moderate, Season: Cool</div>
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-img">
+                                    <img src="assets/image/spinach.png" alt="Spinach">
+                                </div>
+                                <div class="crop-info">
+                                    <h4>Spinach</h4>
+                                    <p>Leafy green vegetable high in vitamins and minerals.</p>
+                                    <div class="details">Soil: Rich loam, Water: Regular, Season: Cool</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="crop-category">
+                        <h3>Cash Crops</h3>
+                        <div class="crops-grid">
+                            <div class="crop-card">
+                                <div class="crop-img">
+                                    <img src="assets/image/coffee.png" alt="Coffee">
+                                </div>
+                                <div class="crop-info">
+                                    <h4>Coffee</h4>
+                                    <p>Popular beverage crop grown in tropical regions.</p>
+                                    <div class="details">Soil: Volcanic, Water: Moderate, Climate: Tropical</div>
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-img">
+                                    <img src="assets/image/cotton.png" alt="Cotton">
+                                </div>
+                                <div class="crop-info">
+                                    <h4>Cotton</h4>
+                                    <p>Natural fiber used in textile production worldwide.</p>
+                                    <div class="details">Soil: Deep, Water: Moderate, Season: Warm</div>
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-img">
+                                    <img src="assets/image/sugarcane.png" alt="Sugarcane">
+                                </div>
+                                <div class="crop-info">
+                                    <h4>Sugarcane</h4>
+                                    <p>Major source of sugar and biofuel production.</p>
+                                    <div class="details">Soil: Loamy, Water: High, Climate: Tropical</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pest Control Section -->
+    <section id="pest-control" class="main-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Pest Control Strategies</h2>
+            </div>
+            <div class="section-content">
+                <p>Integrated pest management (IPM) strategies including biological controls and organic remedies. Discover effective approaches for monitoring, early detection, and treatment of pest infestations.</p>
+                
+                <div class="pest-control-strategies">
+                    <div class="pest-strategy">
+                        <h3>Integrated Pest Management (IPM)</h3>
+                        <p>IPM combines preventive measures, monitoring, and intervention techniques to minimize crop damage while reducing reliance on chemical pesticides.</p>
+                        <ul class="tips-list">
+                            <li>Regularly scout fields for early detection of pests</li>
+                            <li>Use pest-resistant crop varieties when available</li>
+                            <li>Implement crop rotation to disrupt pest cycles</li>
+                            <li>Maintain field sanitation to reduce pest habitat</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pest-strategy">
+                        <h3>Biological Controls</h3>
+                        <p>Biological control methods use natural enemies of pests, such as predators, parasites, and pathogens, to suppress pest populations.</p>
+                        <ul class="tips-list">
+                            <li>Introduce beneficial insects like ladybugs and lacewings</li>
+                            <li>Plant companion crops that attract natural predators</li>
+                            <li>Use microbial pesticides like Bacillus thuringiensis (Bt)</li>
+                            <li>Implement trap crops to divert pests from main crops</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pest-strategy">
+                        <h3>Organic Remedies</h3>
+                        <p>Organic pest control solutions provide environmentally friendly alternatives to synthetic pesticides.</p>
+                        <ul class="tips-list">
+                            <li>Use neem oil spray for insect control</li>
+                            <li>Apply diatomaceous earth for crawling insects</li>
+                            <li>Create garlic and pepper sprays for repelling pests</li>
+                            <li>Use horticultural oils to control soft-bodied insects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="main-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="section-content">
+                <p>Have questions or need agricultural advice? Use the form below to submit inquiries, seek advice, or request additional information from our agricultural experts.</p>
+                
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expertise">Area of Expertise (optional)</label>
+                        <select id="expertise" name="expertise">
+                            <option value="">Select an option</option>
+                            <option value="crops">Crop Farming</option>
+                            <option value="livestock">Livestock</option>
+                            <option value="organics">Organic Farming</option>
+                            <option value="pests">Pest Control</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="attachment">Attachment (optional)</label>
+                        <input type="file" id="attachment" name="attachment">
+                        <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Upload images or documents to help us better understand your query.</p>
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Submit</button>
+                </form>
+                
+                <div class="contact-info">
+                    <h3>Agricultural Extension Services</h3>
+                    <p>For direct communication with agricultural extension services, please contact:</p>
+                    <p>Email: info@agri-hub.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Agricultural Information Hub. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="farming-guides.html">Farming Guides</a>
+                    <a href="crop-details.html">Crop Details</a>
+                    <a href="pest-control.html">Pest Control</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <p>Designed to provide comprehensive resources for farmers and agriculture enthusiasts.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form validation
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your submission! Our agricultural experts will contact you soon.');
+            this.reset();
+        });
+
+        // Hero Slider Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        
+        let currentSlide = 0;
+        let slideInterval;
+        
+        // Function to update the active slide
+        function updateSlide(index) {
+            // Remove active class from all slides and dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Add active class to current slide and dot
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            
+            // Update the current slide index
+            currentSlide = index;
+        }
+        
+        // Next slide function
+        function nextSlide() {
+            let newIndex = currentSlide + 1;
+            if (newIndex >= slides.length) {
+                newIndex = 0;
+            }
+            updateSlide(newIndex);
+        }
+        
+        // Previous slide function
+        function prevSlide() {
+            let newIndex = currentSlide - 1;
+            if (newIndex < 0) {
+                newIndex = slides.length - 1;
+            }
+            updateSlide(newIndex);
+        }
+        
+        // Start automatic slideshow
+        function startSlideshow() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+        
+        // Stop automatic slideshow
+        function stopSlideshow() {
+            clearInterval(slideInterval);
+        }
+        
+        // Event listeners for controls
+        nextBtn.addEventListener('click', function() {
+            stopSlideshow();
+            nextSlide();
+            startSlideshow();
+        });
+        
+        prevBtn.addEventListener('click', function() {
+            stopSlideshow();
+            prevSlide();
+            startSlideshow();
+        });
+        
+        // Click event for dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                stopSlideshow();
+                updateSlide(parseInt(this.getAttribute('data-slide')));
+                startSlideshow();
+            });
+        });
+        
+        // Pause slideshow when hovering over slider
+        const sliderContainer = document.querySelector('.slider-container');
+        sliderContainer.addEventListener('mouseenter', stopSlideshow);
+        sliderContainer.addEventListener('mouseleave', startSlideshow);
+        
+        // Start the slideshow initially
+        startSlideshow();
+    });
+
+    </script>
+</body>
+</html>
